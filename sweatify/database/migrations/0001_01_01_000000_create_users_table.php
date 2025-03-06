@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->integer('age');
             $table->float('weight');
+            $table->string('gender');
             $table->float('height');
             $table->string('password');
             $table->rememberToken();
