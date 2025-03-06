@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+    protected $model = \App\Models\User::class;
+
     /**
      * The current password being used by the factory.
      */
@@ -24,11 +26,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'name' =>$this->faker->name(),
+            'email' =>$this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'age' => $this->faker->numberBetween(18, 60),
+            'weight' => $this->faker->randomFloat(1, 50, 120), // 50kg-120kg
+            'height' => $this->faker->numberBetween(150, 200), // 150cm-200cm
+            'gender' => $this->faker->randomElement(['male', 'female']),
         ];
     }
 

@@ -11,7 +11,7 @@ class Workout extends Model
 
     protected $fillable = [
         'name',
-        'user_id',
+        'description',
     ];
 
     public function user()
