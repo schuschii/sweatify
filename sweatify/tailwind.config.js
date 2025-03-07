@@ -18,4 +18,14 @@ export default {
     },
 
     plugins: [forms],
+
+    variants: {
+        extend: {
+            backgroundColor: ['hover', 'focus', 'active'],
+            textColor: ['hover', 'focus'],
+            borderColor: ['hover', 'focus'],
+            opacity: ['hover', 'focus'],
+            transform: ['hover', 'focus'],
+        },
+    },
 };

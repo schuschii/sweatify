@@ -17,4 +17,49 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Exercise Views
+Route::get('/exercises', function () {
+    return view('exercises');
+})->middleware(['auth', 'verified'])->name('exercises');
+
+Route::get('/exercises/id/{id}', function () {
+    return view('exercise.show');
+})->middleware(['auth', 'verified'])->name('exercise.show');
+
+Route::get('/exercises/name/{name}', function () {
+    return view('exercise');
+})->middleware(['auth', 'verified'])->name('exercises.name');
+
+
+Route::get('/exercises/bodyPartList', function () {
+    return view('exercise.bodyPartList');
+})->middleware(['auth', 'verified'])->name('exercises.bodyPartList');
+
+Route::get('/exercises/body-part/{bodyPart}', function () {
+    return view('exercise.bodypart');
+})->middleware(['auth', 'verified'])->name('exercise.bodypart');
+
+
+
+Route::get('/exercises/equipmentList', function () {
+    return view('exercise.equipmentList');
+})->middleware(['auth', 'verified'])->name('exercises.equipmentList');
+
+Route::get('/exercises/equipment/{equipment}', function () {
+    return view('exercise.equipment');
+})->middleware(['auth', 'verified'])->name('exercises.equipment');
+
+
+
+Route::get('/exercises/targetList', function () {
+    return view('exercise.targetList');
+})->middleware(['auth', 'verified'])->name('exercises.targetList');
+
+Route::get('/exercises/target/{target}', function () {
+    return view('exercise.target');
+})->middleware(['auth', 'verified'])->name('exercises.target');
+
+
+
+
 require __DIR__.'/auth.php';
