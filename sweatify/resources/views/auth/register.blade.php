@@ -9,6 +9,38 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Weight -->
+        <div class="mt-4">
+            <x-input-label for="weight" :value="__('Weight (kg)')" />
+            <x-text-input id="weight" class="block mt-1 w-full" type="number" name="weight" :value="old('weight')" min="0" required />
+            <x-input-error :messages="$errors->get('weight')" class="mt-2" />
+        </div>
+
+        <!-- Height -->
+        <div class="mt-4">
+            <x-input-label for="height" :value="__('Height (cm)')" />
+            <x-text-input id="height" class="block mt-1 w-full" type="number" name="height" :value="old('height')" min="0" required />
+            <x-input-error :messages="$errors->get('height')" class="mt-2" />
+        </div>
+
+        <!-- Age -->
+        <div class="mt-4">
+            <x-input-label for="age" :value="__('Age (years)')" />
+            <x-text-input id="age" class="block mt-1 w-full" type="number" name="age" :value="old('age')" min="0" required />
+            <x-input-error :messages="$errors->get('age')" class="mt-2" />
+        </div>
+
+        <!-- Gender -->
+        <div class="mt-4">
+            <x-input-label for="gender" :value="__('Gender')" />
+            <select id="gender" name="gender" class="block mt-1 w-full bg-gray-800 text-white border border-gray-700 rounded-md focus:ring-indigo-500 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800" required>
+                <option value="">Select your gender</option>
+                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+            </select>
+            <x-input-error :messages="$errors->get('gender')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
