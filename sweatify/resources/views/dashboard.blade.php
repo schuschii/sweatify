@@ -23,14 +23,14 @@
                             <!-- Left Column: User Data -->
                             <td class="px-4 py-2">
                                 <h3 class="text-xl font-semibold">User Information</h3>
-                                <div class="grid grid-cols-2 gap-4 mt-4">
+                                <div class="grid grid-cols-1 gap-4 mt-4">
                                     <div>
-                                        <p><strong>Weight:</strong> 75 kg</p>
-                                        <p><strong>BMI:</strong> 24.5</p>
+                                        <p><strong>Weight:</strong>{{Auth::user()->weight}} kg</p>
+                                        <p><strong>BMI:</strong> {{ Auth::user()->bmi ?? 'N/A' }}</p>
                                     </div>
                                     <div>
-                                        <p><strong>Height:</strong> 180 cm</p>
-                                        <p><strong>Age:</strong> 28 years</p>
+                                        <p><strong>Height:</strong> {{ Auth::user()->height }} cm</p>
+                                        <p><strong>Age:</strong> {{ Auth::user()->age }} years</p>
                                     </div>
                                 </div>
                             </td>

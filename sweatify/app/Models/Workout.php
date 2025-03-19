@@ -12,14 +12,14 @@ class Workout extends Model
     protected $fillable = [
         'name',
         'description',
+        'exercise_ids',
     ];
+    protected $casts = [
+        'exercise_ids' => 'array',
+        ];
 
-    public function user()
+    public function exercises()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function exercises(){
-        return $this->hasMany(Exercise::class, 'workout_exercises');
+        return Exercise::whereIn('id', $this->exercise_ids ?? [])->get();
     }
 }

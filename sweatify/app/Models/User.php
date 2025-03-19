@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,12 +51,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function workouts(): HasMany{
-        return $this->HasMany(workout::class);
-    }
 
     public function workoutHistory(): HasMany
     {
         return $this->hasMany(WorkoutHistory::class);
+    }
+    public function bmi(): Attribute
+    {
+        return Attribute::get(function () {
+            if ($this->height && $this->weight) {
+                $heightInMeters = $this->height / 100;
+                return round($this->weight / ($heightInMeters * $heightInMeters), 2);
+            }
+            return null;
+        });
     }
 }
