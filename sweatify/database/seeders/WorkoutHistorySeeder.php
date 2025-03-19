@@ -13,6 +13,6 @@ class WorkoutHistorySeeder extends Seeder
      */
     public function run(): void
     {
-        WorkoutHistory::factory(50)->create();
+        WorkoutHistory::factory(20)->create();
     }
 }

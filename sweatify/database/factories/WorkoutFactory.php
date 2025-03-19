@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Exercise;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +17,11 @@ class WorkoutFactory extends Factory
      */
     public function definition(): array
     {
+        $exerciseIds = Exercise::inRandomOrder()->limit(rand(3, 5))->pluck('id')->toArray();
         return [
             'name' => $this->faker->randomElement(['cardio', 'strength']),
              'description' => $this->faker->text(),
+            'exercise_ids' => $exerciseIds,
         ];
     }
 }

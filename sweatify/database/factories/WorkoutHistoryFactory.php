@@ -5,6 +5,8 @@ namespace Database\Factories;
 use App\Models\Exercise;
 use App\Models\User;
 use App\Models\Workout;
+use App\Models\WorkoutExerciseHistory;
+use App\Models\WorkoutHistory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,11 +22,26 @@ class WorkoutHistoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::inRandomOrder()->first()->id, // Véletlenszerű user kiválasztása
-            'exercise_id' => Exercise::inRandomOrder()->first()->id, // Véletlenszerű exercise kiválasztása
-            'workout_id' => Workout::inRandomOrder()->first()->id, // Véletlenszerű workout kiválasztása
-            'reps' => $this->faker->numberBetween(5, 20), // Véletlenszerű ismétlésszám
-            'weight' => $this->faker->optional()->numberBetween(20, 100), // Véletlenszerű súly (vagy null)
+            'user_id' => User::inRandomOrder()->first()?->id ?? User::factory()->create()->id,
+            'workout_id' => Workout::inRandomOrder()->first()?->id ?? Workout::factory()->create()->id,
         ];
+    }
+
+    public
+    function configure()
+    {
+        return $this->afterCreating(function (WorkoutHistory $workoutHistory) {
+            $workout = $workoutHistory->workout;
+            $exerciseIds = $workout->exercise_ids ?? [];
+
+            foreach ($exerciseIds as $exerciseId) {
+                WorkoutExerciseHistory::create([
+                    'workout_history_id' => $workoutHistory->id,
+                    'exercise_id' => $exerciseId,
+                    'reps' => rand(8, 20),
+                    'weight' => rand(10, 50),
+                ]);
+            }
+        });
     }
 }
