@@ -12,14 +12,14 @@
         <!-- Weight -->
         <div class="mt-4">
             <x-input-label for="weight" :value="__('Weight (kg)')" />
-            <x-text-input id="weight" class="block mt-1 w-full" type="number" name="weight" :value="old('weight')" min="0" required />
+            <x-text-input id="weight" class="block mt-1 w-full" type="number" name="weight" :value="old('weight')" min="0" step="any" required />
             <x-input-error :messages="$errors->get('weight')" class="mt-2" />
         </div>
 
         <!-- Height -->
         <div class="mt-4">
             <x-input-label for="height" :value="__('Height (cm)')" />
-            <x-text-input id="height" class="block mt-1 w-full" type="number" name="height" :value="old('height')" min="0" required />
+            <x-text-input id="height" class="block mt-1 w-full" type="number" name="height" :value="old('height')" min="0" step="any" required />
             <x-input-error :messages="$errors->get('height')" class="mt-2" />
         </div>
 
