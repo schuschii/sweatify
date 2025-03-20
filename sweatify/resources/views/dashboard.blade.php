@@ -5,6 +5,7 @@
         </h2>
     </x-slot>
 
+    <div>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <!-- User Data and Favorite Exercises Graph in a Table -->
         <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mt-8">
@@ -46,6 +47,7 @@
         </div>
 
         <!-- Workout History Section -->
+        <div>
         <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mt-8">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 <h3 class="text-xl font-semibold">Workout History</h3>
@@ -64,6 +66,8 @@
                 </table>
             </div>
         </div>
+        </div>
+    </div>
     </div>
 
     <!-- Chart.js Script for Favorite Exercises -->

@@ -6,17 +6,10 @@
     </x-slot>
 
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-        <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mt-8">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
-
-        <h3 class="text-xl font-semibold">Workouts</h3>
-        <button>Start workout!</button>
-
-                <div class="py-12">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300">Workouts</h3>
                             <label for="limit" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Number of Workouts per Page:</label>
                             <select id="limit" class="mt-1 block w-full" onchange="fetchWorkouts(true)">
                                 <option value="5">5</option>
@@ -44,13 +37,10 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
-                </div>
 
             </div>
         </div>
 
-    </div>
 
     <!-- Fetch the workouts -->
     <script>
