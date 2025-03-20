@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\WorkoutController;
+use App\Http\Controllers\WorkoutHistoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +25,10 @@ Route::get('/exercises/equipment/{equipment}', [ExerciseController::class, 'filt
 Route::get('/exercises/targetList', [ExerciseController::class, 'getTargetList']);
 Route::get('/exercises/target/{target}', [ExerciseController::class, 'filterByTarget']);
 
-// TODO: Make use of Sanctum to authenticate api endpoints.
-//Route::get('/exercises', [ExerciseController::class, 'index'])->middleware('auth:sanctum');
+//Workouts
+Route::get('/workouts', [WorkoutController::class, 'index']);
+Route::get('/workouts/id/{id}', [WorkoutController::class, 'show']);
+Route::delete('/workouts/delete/{id}', [WorkoutController::class, 'destroy']);
+
+Route::get('/workouts/history/{userId}', [WorkoutHistoryController::class, 'show']);
 

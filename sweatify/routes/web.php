@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -59,7 +63,9 @@ Route::get('/exercises/target/{target}', function () {
     return view('exercise.target');
 })->middleware(['auth', 'verified'])->name('exercises.target');
 
-
-
+// Workout Views
+Route::get('/workouts/id/{id}', function () {
+    return view('workout.show');
+})->middleware(['auth', 'verified'])->name('workout.show');
 
 require __DIR__.'/auth.php';

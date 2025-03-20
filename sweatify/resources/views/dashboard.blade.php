@@ -5,82 +5,66 @@
         </h2>
     </x-slot>
 
-
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            <!-- User Data and Favorite Exercises Graph in a Table -->
-            <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mt-8">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <table class="w-full max-w-[400px]">
-                        <thead>
-                        <tr>
-                            <th class="px-4 py-2 text-left">User Information</th>
-                            <th class="px-4 py-2 text-left">Favorite Exercises</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <!-- Left Column: User Data -->
-                            <td class="px-4 py-2">
-                                <h3 class="text-xl font-semibold">User Information</h3>
-                                <div class="grid grid-cols-1 gap-4 mt-4">
-                                    <div>
-                                        <p><strong>Weight:</strong>{{Auth::user()->weight}} kg</p>
-                                        <p><strong>BMI:</strong> {{ Auth::user()->bmi ?? 'N/A' }}</p>
-                                    </div>
-                                    <div>
-                                        <p><strong>Height:</strong> {{ Auth::user()->height }} cm</p>
-                                        <p><strong>Age:</strong> {{ Auth::user()->age }} years</p>
-                                    </div>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <!-- User Data and Favorite Exercises Graph in a Table -->
+        <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mt-8">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <table class="w-full max-w-[400px]">
+                    <thead>
+                    <tr>
+                        <th class="px-4 py-2 text-left">User Information</th>
+                        <th class="px-4 py-2 text-left">Favorite Exercises</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <!-- Left Column: User Data -->
+                        <td class="px-4 py-2">
+                            <h3 class="text-xl font-semibold">User Information</h3>
+                            <div class="grid grid-cols-1 gap-4 mt-4">
+                                <div>
+                                    <p><strong>Weight:</strong> {{Auth::user()->weight}} kg</p>
+                                    <p><strong>BMI:</strong> {{ Auth::user()->bmi ?? 'N/A' }}</p>
                                 </div>
-                            </td>
+                                <div>
+                                    <p><strong>Height:</strong> {{ Auth::user()->height }} cm</p>
+                                    <p><strong>Age:</strong> {{ Auth::user()->age }} years</p>
+                                </div>
+                            </div>
+                        </td>
 
-                            <!-- Right Column: Favorite Exercises Graph -->
-                            <td class="px-4 py-2" style="max-width: 250px;">
+                        <!-- Right Column: Favorite Exercises Graph -->
+                        <td class="px-4 py-2" style="max-width: 250px;">
                             <div class="mt-4">
-                                    <canvas id="favoriteExercisesChart"></canvas>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                <canvas id="favoriteExercisesChart"></canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <!-- Workout History Section -->
-            <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mt-8">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="text-xl font-semibold">Workout History</h3>
-                    <table class="w-full mt-4 table-auto">
-                        <thead>
-                        <tr>
-                            <th class="px-4 py-2 text-left">Date</th>
-                            <th class="px-4 py-2 text-left">Exercise</th>
-                            <th class="px-4 py-2 text-left">Duration (mins)</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="px-4 py-2">March 6, 2025</td>
-                            <td class="px-4 py-2">Push-ups, Squats</td>
-                            <td class="px-4 py-2">30</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2">March 5, 2025</td>
-                            <td class="px-4 py-2">Running, Bicep curls</td>
-                            <td class="px-4 py-2">45</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2">March 4, 2025</td>
-                            <td class="px-4 py-2">Yoga, Planks</td>
-                            <td class="px-4 py-2">60</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
         </div>
+
+        <!-- Workout History Section -->
+        <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mt-8">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <h3 class="text-xl font-semibold">Workout History</h3>
+                <table class="w-full mt-4 table-auto text-center" id="workout-history-table" style="text-align: center">
+                    <thead>
+                    <tr>
+                        <th class="px-4 py-2 text-left text-center">Workout</th>
+                        <th class="px-4 py-2 text-left text-center">Date</th>
+                        <th class="px-4 py-2 text-left text-center" >Exercises</th>
+                        <th class="px-4 py-2 text-left text-center">Duration (mins)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Workout History Rows Will be Dynamically Inserted Here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <!-- Chart.js Script for Favorite Exercises -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -117,4 +101,45 @@
         });
     </script>
 
+    <script>
+        // Fetch workout history data for the user (use authenticated user ID)
+        const userId = {{ Auth::id() }};
+
+        fetch(`/api/workouts/history/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                const workoutHistoryTable = document.getElementById('workout-history-table').querySelector('tbody');
+                workoutHistoryTable.innerHTML = '';
+
+                data.forEach((entry, index) => {
+
+
+
+                    const workoutRow = document.createElement('tr');
+                    workoutRow.classList.add('border', 'dark:border-gray-300', 'rounded-lg');
+
+
+                    workoutRow.innerHTML = `
+                <td class="px-4 py-4">${entry.workout_name}</td>
+                <td class="px-4 py-4">${entry.date}</td>
+                <td class="px-4 py-4">
+                    <div class="flex flex-col space-y-2">
+                        ${entry.exercise_names.map(exercise => `
+                            <div class="flex justify-between py-2 px-4 border dark:border-gray-300 rounded-lg">
+                                <span class="w-1/3">${exercise.exercise_name}</span>
+                                <span class="w-1/3">${exercise.reps} reps</span>
+                                <span class="w-1/3">${exercise.weight} kg</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </td>
+                <td class="px-4 py-4">${entry.duration}</td>
+            `;
+                    workoutHistoryTable.appendChild(workoutRow);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching workout history:', error);
+            });
+    </script>
 </x-app-layout>
