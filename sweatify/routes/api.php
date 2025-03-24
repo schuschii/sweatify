@@ -32,3 +32,9 @@ Route::delete('/workouts/delete/{id}', [WorkoutController::class, 'destroy']);
 
 Route::get('/workouts/history/{userId}', [WorkoutHistoryController::class, 'show']);
 
+Route::post('/workouts/create', [WorkoutController::class, 'store']);
+Route::get('/workouts/types', [WorkoutController::class, 'types']);
+
+Route::put('/workouts/update/{workout}', [WorkoutController::class, 'update']);
+
+

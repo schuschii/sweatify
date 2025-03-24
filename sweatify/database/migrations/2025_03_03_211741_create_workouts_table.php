@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('workouts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('type');
             $table->text('description')->nullable();
             $table->json('exercise_ids');
+            $table->boolean('is_custom')->default(false);
             $table->timestamps();
         });
     }

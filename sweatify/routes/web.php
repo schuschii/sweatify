@@ -68,4 +68,12 @@ Route::get('/workouts/id/{id}', function () {
     return view('workout.show');
 })->middleware(['auth', 'verified'])->name('workout.show');
 
+Route::get('/workouts/create', function () {
+    return view('workout.create');
+})->middleware(['auth', 'verified'])->name('workout.create');
+
+Route::get('/workouts/update/id/{id}', function () {
+    return view('workout.update');
+})->middleware(['auth', 'verified'])->name('workout.update');
+
 require __DIR__.'/auth.php';

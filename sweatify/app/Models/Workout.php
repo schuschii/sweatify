@@ -12,7 +12,9 @@ class Workout extends Model
     protected $fillable = [
         'name',
         'description',
+        'type',
         'exercise_ids',
+        'is_custom'
     ];
     protected $casts = [
         'exercise_ids' => 'array',

@@ -18,7 +18,11 @@ class WorkoutController extends Controller
         $limit = $request->query('limit', 10);
         $offset = $request->query('offset', 0);
 
-        $workouts = Workout::offset($offset)->limit($limit)->get();
+        $workouts = Workout::orderBy('id', 'desc')
+        ->offset($offset)
+            ->limit($limit)
+            ->get();
+
         $total = Workout::count();
 
         return response()->json([
@@ -34,10 +38,13 @@ class WorkoutController extends Controller
         try {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
+                'type' => 'required|string',
                 'description' => 'nullable|string',
                 'exercise_ids' => 'required|array',
                 'exercise_ids.*' => 'exists:exercises,id',
             ]);
+
+            $validated['is_custom'] = true;
 
             $workout = Workout::create($validated);
 
@@ -46,6 +53,7 @@ class WorkoutController extends Controller
             return response()->json(['errors' => $e->errors()], 422);
         }
     }
+
 
     public function show($id)
     {
@@ -56,24 +64,35 @@ class WorkoutController extends Controller
         return response()->json([
             'id' => $workout->id,
             'name' => $workout->name,
+            'type' => $workout->type,
             'description' => $workout->description,
             'exercises' => $exercises, // Include exercises with their names
             'created_at' => $workout->created_at,
             'updated_at' => $workout->updated_at,
+            'is_custom' => $workout->is_custom
         ]);
     }
 
     public function update(Request $request, Workout $workout): JsonResponse
     {
         try {
+
+            \Log::info('Request data:', $request->all());
+
+
             $validated = $request->validate([
-                'name' => 'sometimes|string|max:255',
+                'name' => 'required|string|max:255',
+                'type' => 'required|string',
                 'description' => 'nullable|string',
-                'exercise_ids' => 'sometimes|array',
+                'exercise_ids' => 'required|array',
                 'exercise_ids.*' => 'exists:exercises,id',
             ]);
 
+            $validated['is_custom'] = true;
+
             $workout->update($validated);
+
+            // Add updated_at date
 
             return response()->json($workout);
         } catch (ValidationException $e) {
@@ -84,7 +103,26 @@ class WorkoutController extends Controller
     public function destroy($id): JsonResponse
     {
         $workout = Workout::findOrFail($id);
+
+
+        if ($workout->is_custom != 1) {
+            return response()->json(['error' => 'Only custom workouts can be deleted'], 403);
+        }
+
         $workout->delete();
+
         return response()->json(['message' => 'Workout deleted successfully']);
     }
+
+
+    public function types(): JsonResponse
+    {
+
+        $types = Workout::select('type')->distinct()->get();
+
+        return response()->json([
+            'types' => $types->pluck('type')
+        ]);
+    }
+
 }

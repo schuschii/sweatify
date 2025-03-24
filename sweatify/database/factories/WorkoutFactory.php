@@ -19,7 +19,21 @@ class WorkoutFactory extends Factory
     {
         $exerciseIds = Exercise::inRandomOrder()->limit(rand(3, 5))->pluck('id')->toArray();
         return [
-            'name' => $this->faker->randomElement(['cardio', 'strength']),
+            'name' => $this->faker->randomElement(['Cardio Blast',
+                'Strength Training',
+                'HIIT',
+                'Full Body Workout',
+                'Leg Day',
+                'Push/Pull Workout',
+                'Endurance Training',
+                'Powerlifting',
+                'Yoga Flow',
+                'Circuit Training',
+                'Boxing Training',
+                'CrossFit WOD',
+                'Pilates Routine',
+                'Dance Aerobics']),
+            'type' => $this->faker->randomElement(['cardio', 'strength', 'endurance', 'flexibility', 'swimming', 'dance']),
              'description' => $this->faker->text(),
             'exercise_ids' => $exerciseIds,
         ];
