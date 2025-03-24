@@ -52,6 +52,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function weightLogs(): HasMany
+    {
+        return $this->hasMany(WeightLog::class);
+    }
+
     public function workoutHistory(): HasMany
     {
         return $this->hasMany(WorkoutHistory::class);

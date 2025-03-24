@@ -22,7 +22,37 @@
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
+        <!-- Age -->
+        <div>
+            <x-input-label for="age" :value="__('Age')" />
+            <x-text-input id="age" name="age" type="number" class="mt-1 block w-full" :value="old('age', $user->age)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('age')" />
+        </div>
 
+        <!-- Height -->
+        <div>
+            <x-input-label for="height" :value="__('Height (cm)')" />
+            <x-text-input id="height" name="height" type="number" class="mt-1 block w-full" :value="old('height', $user->height)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('height')" />
+        </div>
+
+        <!-- Weight -->
+        <div>
+            <x-input-label for="weight" :value="__('Weight (kg)')" />
+            <x-text-input id="weight" name="weight" type="number" step="0.1" class="mt-1 block w-full" :value="old('weight', $user->weight)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('weight')" />
+        </div>
+
+        <!-- Gender -->
+        <div>
+            <x-input-label for="gender" :value="__('Gender')" />
+            <select name="gender" id="gender" class="mt-1 block w-full rounded-md shadow-sm border-gray-300 dark:bg-gray-700 dark:text-white">
+                <option value="male" {{ old('gender', $user->gender) === 'male' ? 'selected' : '' }}>Male</option>
+                <option value="female" {{ old('gender', $user->gender) === 'female' ? 'selected' : '' }}>Female</option>
+                <option value="other" {{ old('gender', $user->gender) === 'other' ? 'selected' : '' }}>Other</option>
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('gender')" />
+        </div>
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />

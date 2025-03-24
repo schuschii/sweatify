@@ -69,17 +69,55 @@
         </div>
     </div>
     </div>
+    <div class="mt-10 p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Weight Progress</h2>
+        <canvas id="weightChart"></canvas>
+    </div>
 
-    <!-- Chart.js Script for Favorite Exercises -->
+    <!-- Chart.js only once -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Weight Progress Chart -->
     <script>
-        const ctx = document.getElementById('favoriteExercisesChart').getContext('2d');
-        const favoriteExercisesChart = new Chart(ctx, {
+        const weightCtx = document.getElementById('weightChart').getContext('2d');
+
+        const weightData = @json($weightLogs->pluck('weight'));
+        const dateLabels = @json($weightLogs->pluck('created_at')->map(fn($d) => $d->format('Y-m-d')));
+
+        new Chart(weightCtx, {
+            type: 'line',
+            data: {
+                labels: dateLabels,
+                datasets: [{
+                    label: 'Weight (kg)',
+                    data: weightData,
+                    borderWidth: 2,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                    fill: false,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- Favorite Exercises Chart -->
+    <script>
+        const favoriteCtx = document.getElementById('favoriteExercisesChart').getContext('2d');
+        const favoriteExercisesChart = new Chart(favoriteCtx, {
             type: 'pie',
             data: {
                 labels: ['Push-ups', 'Squats', 'Running', 'Bicep Curls', 'Yoga'],
                 datasets: [{
-                    data: [20, 15, 25, 10, 30], // Fake data (percentages)
+                    data: [20, 15, 25, 10, 30], // Replace with real data later
                     backgroundColor: [
                         '#4CAF50', '#FF9800', '#2196F3', '#FF5722', '#9C27B0'
                     ],
