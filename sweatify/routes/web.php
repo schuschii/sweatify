@@ -45,7 +45,6 @@ Route::get('/exercises/body-part/{bodyPart}', function () {
 })->middleware(['auth', 'verified'])->name('exercise.bodypart');
 
 
-
 Route::get('/exercises/equipmentList', function () {
     return view('exercise.equipmentList');
 })->middleware(['auth', 'verified'])->name('exercises.equipmentList');
@@ -53,7 +52,6 @@ Route::get('/exercises/equipmentList', function () {
 Route::get('/exercises/equipment/{equipment}', function () {
     return view('exercise.equipment');
 })->middleware(['auth', 'verified'])->name('exercises.equipment');
-
 
 
 Route::get('/exercises/targetList', function () {
