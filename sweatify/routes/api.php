@@ -37,6 +37,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/workouts/types', [WorkoutController::class, 'types']);
 
     Route::put('/workouts/update/{workout}', [WorkoutController::class, 'update']);
-
-
 });

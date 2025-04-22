@@ -27,7 +27,6 @@ class ExerciseApiTest extends TestCase
 
     public function test_user_can_get_exercise_list()
     {
-      //  Log::info("Current database: " . env('DB_DATABASE'));
 
         // Hit the endpoint
         $response = $this->getJson('/api/exercises');
@@ -72,7 +71,6 @@ class ExerciseApiTest extends TestCase
                 'name' => $exercise->name,
                 'target' => $exercise->target,
                 'bodyPart' => $exercise->bodyPart,
-                // Add other fields you want to verify
             ]);
     }
 
