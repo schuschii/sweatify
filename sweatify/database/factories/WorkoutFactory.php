@@ -3,10 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Exercise;
+use App\Models\Workout;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Workout>
+ * @extends Factory<Workout>
  */
 class WorkoutFactory extends Factory
 {

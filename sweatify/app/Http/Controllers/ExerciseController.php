@@ -39,7 +39,6 @@ class ExerciseController extends Controller
     }
 
 
-
     // Get list of all unique body parts
     public function getBodyPartList()
     {
