@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use JsonException;
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -21,6 +22,9 @@ class ProfileTest extends TestCase
         $response->assertOk();
     }
 
+    /**
+     * @throws JsonException
+     */
     public function test_profile_information_can_be_updated(): void
     {
         $user = User::factory()->create();
@@ -30,6 +34,10 @@ class ProfileTest extends TestCase
             ->patch('/profile', [
                 'name' => 'Test User',
                 'email' => 'test@example.com',
+                'age' => 25,
+                'height' => 180,
+                'weight' => 75,
+                'gender' => 'male',
             ]);
 
         $response
@@ -43,6 +51,9 @@ class ProfileTest extends TestCase
         $this->assertNull($user->email_verified_at);
     }
 
+    /**
+     * @throws JsonException
+     */
     public function test_email_verification_status_is_unchanged_when_the_email_address_is_unchanged(): void
     {
         $user = User::factory()->create();
@@ -52,6 +63,10 @@ class ProfileTest extends TestCase
             ->patch('/profile', [
                 'name' => 'Test User',
                 'email' => $user->email,
+                'age' => 25,
+                'height' => 180,
+                'weight' => 75,
+                'gender' => 'male',
             ]);
 
         $response
@@ -61,6 +76,9 @@ class ProfileTest extends TestCase
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
 
+    /**
+     * @throws JsonException
+     */
     public function test_user_can_delete_their_account(): void
     {
         $user = User::factory()->create();

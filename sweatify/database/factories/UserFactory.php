@@ -2,16 +2,18 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
-    protected $model = \App\Models\User::class;
+    protected $model = User::class;
 
     /**
      * The current password being used by the factory.
@@ -28,6 +30,7 @@ class UserFactory extends Factory
         return [
             'name' =>$this->faker->name(),
             'email' =>$this->faker->unique()->safeEmail(),
+            'email_verified_at' => Carbon::now(),
             'password' => static::$password ??= Hash::make('password'),
             'age' => $this->faker->numberBetween(18, 60),
             'weight' => $this->faker->randomFloat(1, 50, 120), // 50kg-120kg

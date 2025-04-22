@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
 
+
 class ExerciseController extends Controller
 {
     // Get all exercises
@@ -33,9 +34,9 @@ class ExerciseController extends Controller
     // Get exercise by name
     public function getByName($name)
     {
-        return Exercise::where('name', 'like', "%$name%")->get();
-    }
+       return Exercise::where('name', 'like', "%$name%")->get();
 
+    }
 
 
     // Get list of all unique body parts
@@ -124,8 +125,6 @@ class ExerciseController extends Controller
             'offset' => (int) $offset
         ]);
     }
-
-
 
 
 }
