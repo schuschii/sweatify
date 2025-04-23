@@ -21,7 +21,7 @@ Sweatify is a fitness application designed for gym lovers and newcomers alike wh
 
 ## Installation
 ### Prerequisites
-- **PHP** >= 8.0
+- **PHP** >= 8.2
 - **Composer** (PHP dependency manager)
 - **MySQL** (or Dockerized MySQL instance)
 - **Node.js & NPM** (for frontend assets)
