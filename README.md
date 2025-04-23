@@ -29,7 +29,7 @@ Sweatify is a fitness application designed for gym lovers and newcomers alike wh
 ### Setup Steps
 1. Clone the repository:
     ```bash
-    git clone https://github.com/CodecoolGlobal/el-proyecte-grande-prototype-general-schuschii
+    git clone https://github.com/schuschii/sweatify
     cd sweatify
     ```
 2. Install dependencies:
@@ -46,11 +46,15 @@ Sweatify is a fitness application designed for gym lovers and newcomers alike wh
     ```bash
     php artisan migrate --seed
     ```
-5. Start the local development server:
+5. Run custom artisan command to import exercise data from json file to database
+   ```bash
+    php artisan app:store-exercise-data
+   ```
+6. Start the local development server:
     ```bash
     php artisan serve
     ```
-6. (Optional) Run tests:
+7. (Optional) Run tests:
     ```bash
     php artisan test
     ```
@@ -59,14 +63,15 @@ Sweatify is a fitness application designed for gym lovers and newcomers alike wh
 Sweatify operates on a free-to-use model where users gain full access to the platform upon registration. The app is designed to provide value without requiring subscriptions or in-app purchases.
 
 ## Contribution
-Contributions are welcome! If you'd like to improve Sweatify, please submit a pull request following the contribution guidelines.
+Thanks to all the contributors!  
+See [contributors](https://github.com/schuschii/sweatify/graphs/contributors)
 
 ## License
-This project is licensed under the MIT License.
+This project is open-sourced under the MIT License.
 
 ## Contact
 For any inquiries or support, reach out:
-- **GitHub**: [github.com/CodecoolGlobal/el-proyecte-grande-prototype-general-schuschii](https://github.com/CodecoolGlobal/el-proyecte-grande-prototype-general-schuschii)
+- **GitHub**: [contact](https://github.com/schuschii/sweatify)
 
 ---
 ### Additional Documentation
