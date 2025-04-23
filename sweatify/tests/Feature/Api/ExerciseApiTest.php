@@ -76,7 +76,7 @@ class ExerciseApiTest extends TestCase
 
     public function test_user_can_get_exercise_by_name()
     {
-        $exercise = Exercise::find(17);
+        $exercise = Exercise::where('name', 'not like', '%/%')->first();
         $response = $this->getJson("/api/exercises/name/{$exercise->name}");
         $response->assertStatus(200)
         ->assertJsonFragment(['name' => $exercise->name]);

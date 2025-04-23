@@ -3,6 +3,7 @@ namespace Feature\Api;
 
 use App\Models\User;
 use App\Models\Workout;
+use App\Models\Exercise;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
@@ -102,7 +103,7 @@ class WorkoutApiTest extends TestCase
             'name' => 'Test Workout',
             'type' => 'cardio',
             'description' => 'A test workout description',
-            'exercise_ids' => [1, 2, 3]  // Assuming you have valid exercise IDs
+            'exercise_ids' => Exercise::inRandomOrder()->limit(3)->pluck('id')->toArray()
         ];
 
         // Hit the endpoint
@@ -144,7 +145,7 @@ class WorkoutApiTest extends TestCase
             'name' => 'Updated Workout',
             'type' => 'strength',
             'description' => 'Updated workout description',
-            'exercise_ids' => [4, 5, 6]
+            'exercise_ids' => Exercise::inRandomOrder()->limit(3)->pluck('id')->toArray()
         ];
 
 
