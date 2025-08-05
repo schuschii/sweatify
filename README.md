@@ -44,6 +44,29 @@ Sweatify consolidates all essential fitness features into one platform, eliminat
     chmod +x set_up.sh
     ./set_up.sh
     ```
+4. Visit site
+   You can visit http://localhost in your browser.
+
+5. Optional : Run tests
+    ```bash
+    chmod +x test.sh
+    ./test.sh
+    ```
+-> This script:
+- runs migration on test database
+- seeds test database with data
+- runs tests
+
+6. Stop containers and app
+    ```bash
+    chmod +x stop.sh
+    ./stop.sh
+    ```
+-> this script runs:
+- Stops containers
+- Removes containers
+- Removes networks
+- Removes default volumes created by Sail
 
 ## Business Model
 Sweatify operates on a free-to-use model where users gain full access to the platform upon registration.
