@@ -2,7 +2,11 @@
 # Sweatify
 
 ## Overview
-Sweatify is a fitness application designed for gym lovers and newcomers alike who want to transform their lifestyle. This registration-based app provides intelligent workout plans, personalized coaching, and progress tracking to help users achieve their fitness goals, whether it be losing weight, building muscle, or maintaining a healthy lifestyle. Sweatify consolidates all essential fitness features into one platform, eliminating the need for multiple fitness apps.
+Sweatify is a fitness application designed for gym lovers and newcomers alike who want to transform their lifestyle.
+This registration-based app provides intelligent workout plans, personalized coaching,
+and progress tracking to help users achieve their fitness goals, whether it be losing weight, building muscle,
+or maintaining a healthy lifestyle.
+Sweatify consolidates all essential fitness features into one platform, eliminating the need for multiple fitness apps.
 
 ## Features
 - **User Authentication**: Secure authentication with Laravel Breeze and Sanctum.
@@ -17,14 +21,13 @@ Sweatify is a fitness application designed for gym lovers and newcomers alike wh
 - **Authentication**: Laravel Breeze and Sanctum
 - **Database**: MySQL with Eloquent ORM
 - **API**: Custom-built REST API
-- **Containerization**: Docker (optional for deployment)
+- **Containerization**: Docker with Laravel Sail for local development
 
 ## Installation
 ### Prerequisites
-- **PHP** >= 8.2
-- **Composer** (PHP dependency manager)
-- **MySQL** (or Dockerized MySQL instance)
-- **Node.js & NPM** (for frontend assets)
+- Docker (with Docker Compose)
+- Composer (optional if using Sail to run composer inside the container)
+- Node.js & NPM (optional, can also run inside Sail)
 
 ### Setup Steps
 1. Clone the repository:
@@ -32,38 +35,19 @@ Sweatify is a fitness application designed for gym lovers and newcomers alike wh
     git clone https://github.com/schuschii/sweatify
     cd sweatify
     ```
-2. Install dependencies:
+2. Set up run by bash script:
     ```bash
-    composer install
-    npm install && npm run dev
+    chmod +x set_up.sh
+    ./set_up.sh
     ```
-3. Set up environment variables:
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
-4. Configure the database in `.env` and run migrations:
-    ```bash
-    php artisan migrate --seed
-    ```
-5. Run custom artisan command to import exercise data from json file to database
-   ```bash
-    php artisan app:store-exercise-data
-   ```
-6. Start the local development server:
-    ```bash
-    php artisan serve
-    ```
-7. (Optional) Run tests:
-    ```bash
-    php artisan test
-    ```
+> This script installs dependencies, starts Laravel Sail, runs migrations, seeds the database, imports exercise data, and compiles frontend assets.
 
 ## Business Model
-Sweatify operates on a free-to-use model where users gain full access to the platform upon registration. The app is designed to provide value without requiring subscriptions or in-app purchases.
+Sweatify operates on a free-to-use model where users gain full access to the platform upon registration.
+The app is designed to provide value without requiring subscriptions or in-app purchases.
 
 ## Contribution
-Thanks to all the contributors!  
+Thanks to all the contributors!
 See [contributors](https://github.com/schuschii/sweatify/graphs/contributors)
 
 ## License
