@@ -4,8 +4,8 @@
 ## Overview
 Sweatify is a fitness application designed for gym lovers and newcomers alike who want to transform their lifestyle.
 This registration-based app provides intelligent workout plans, personalized coaching,
-and progress tracking to help users achieve their fitness goals, whether it be losing weight, building muscle,
-or maintaining a healthy lifestyle.
+and progress tracking to help users achieve their fitness goals, whether it be losing weight,
+building muscle, or maintaining a healthy lifestyle.
 Sweatify consolidates all essential fitness features into one platform, eliminating the need for multiple fitness apps.
 
 ## Features
@@ -35,12 +35,15 @@ Sweatify consolidates all essential fitness features into one platform, eliminat
     git clone https://github.com/schuschii/sweatify
     cd sweatify
     ```
-2. Set up run by bash script:
+2. Copy environment file:
+    ```bash
+    cp .env.example .env
+    ```
+3. Set up run by bash script:
     ```bash
     chmod +x set_up.sh
     ./set_up.sh
     ```
-> This script installs dependencies, starts Laravel Sail, runs migrations, seeds the database, imports exercise data, and compiles frontend assets.
 
 ## Business Model
 Sweatify operates on a free-to-use model where users gain full access to the platform upon registration.
