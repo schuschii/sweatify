@@ -50,6 +50,17 @@ jobs:
           cd sweatify
           composer install --no-interaction --prefer-dist
 
+      - name: Generate Laravel app key
+        run: |
+          cd sweatify
+          php artisan key:generate --ansi
+          
+      - name: Inject Laravel APP_KEY manually
+        run: |
+          cd sweatify
+          APP_KEY=$(php -r "echo 'base64:'.base64_encode(random_bytes(32));")
+          echo "APP_KEY=$APP_KEY" >> .env
+
       - name: Clear Laravel config cache
         run: |
           cd sweatify
@@ -88,10 +99,6 @@ jobs:
           cd sweatify
           php artisan db:monitor 
 
-      - name: Generate Laravel app key
-        run: |
-          cd sweatify
-          php artisan key:generate --ansi
 
       - name: Run migrations with seeding
         run: |
