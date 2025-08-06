@@ -21,7 +21,7 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h mysql --silent"
+          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Copy .env.testing to .env
-        run: cp sweatify/.env.testing sweatify/.env
+        run: cp sweatify/.env.ci sweatify/.env
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -48,7 +48,7 @@ jobs:
       - name: Wait for MySQL to be ready
         run: |
           for i in {1..30}; do
-            if mysql -h mysql -u sail -ppassword -e "SELECT 1" &> /dev/null; then
+            if mysql -h 127.0.0.1 -u sail -ppassword -e "SELECT 1" &> /dev/null; then
               echo "MySQL is ready!"
               break
             fi
@@ -57,7 +57,9 @@ jobs:
           done
 
       - name: Generate Laravel app key
-        run: php artisan key:generate --ansi
+        run: |
+          cd sweatify
+          php artisan key:generate --ansi
 
       - name: Run migrations with seeding
         run: |
