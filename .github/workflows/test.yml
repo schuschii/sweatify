@@ -65,13 +65,13 @@ jobs:
 
       - name: Check MySQL client connectivity
         run: |
-          mysql -h 127.0.0.1 -u sail -ppassword -e "SELECT 1" || echo "MySQL client connection failed"
+          mysql -h mysql -u sail -ppassword -e "SELECT 1" || echo "MySQL client connection failed"
           
 
       - name: Wait for MySQL to be ready
         run: |
           for i in {1..30}; do
-            if mysql -h 127.0.0.1 -u sail -ppassword -e "SELECT 1" &> /dev/null; then
+            if mysql -h mysql -u sail -ppassword -e "SELECT 1" &> /dev/null; then
               echo "MySQL is ready!"
               break
             fi
