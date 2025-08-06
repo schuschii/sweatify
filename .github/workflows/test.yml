@@ -47,6 +47,10 @@ jobs:
           cd sweatify
           composer install --no-interaction --prefer-dist
         
+      - name: Check MySQL client connectivity
+        run: |
+          mysql -h 127.0.0.1 -u sail -ppassword -e "SELECT 1" || echo "MySQL client connection failed"
+          
 
       - name: Wait for MySQL to be ready
         run: |
@@ -58,6 +62,12 @@ jobs:
             echo "Waiting for MySQL..."
             sleep 2
           done
+
+      - name: Debug Laravel environment
+        run: |
+          cd sweatify
+          php artisan env  # Show current environment
+          php artisan config:dump --env=testing  # Show loaded config
 
       - name: Debug MySQL connection
         run: |
