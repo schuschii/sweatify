@@ -63,10 +63,16 @@ jobs:
           php artisan config:show database --env=testing  # Show database config
           php artisan tinker --execute="echo config('database.connections.mysql.host');"
 
+      - name: List Docker containers
+        run: docker ps -a
+
+
       - name: Check MySQL client connectivity
         run: |
           mysql -h mysql -u sail -ppassword -e "SELECT 1" || echo "MySQL client connection failed"
           
+      - name: List Docker containers
+        run: docker ps -a
 
       - name: Wait for MySQL to be ready
         run: |
