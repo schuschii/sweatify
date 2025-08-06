@@ -60,7 +60,7 @@ jobs:
         run: |
           cd sweatify
           php artisan env  # Show current environment
-          php artisan config:show database --env=testing  # Show database config
+          php artisan config:show database  # Show database config
           php artisan tinker --execute="echo config('database.connections.mysql.host');"
 
       - name: List Docker containers
@@ -70,9 +70,7 @@ jobs:
       - name: Check MySQL client connectivity
         run: |
           mysql -h mysql -u sail -ppassword -e "SELECT 1" || echo "MySQL client connection failed"
-          
-      - name: List Docker containers
-        run: docker ps -a
+
 
       - name: Wait for MySQL to be ready
         run: |
@@ -84,10 +82,11 @@ jobs:
             echo "Waiting for MySQL... attempt $i"
             sleep 2
           done
+
       - name: Debug MySQL connection
         run: |
           cd sweatify
-          php artisan db:monitor --env=testing
+          php artisan db:monitor 
 
       - name: Generate Laravel app key
         run: |
@@ -97,7 +96,7 @@ jobs:
       - name: Run migrations with seeding
         run: |
           cd sweatify
-          php artisan migrate --env=testing --seed --force
+          php artisan migrate --seed --force
 
       - name: Run Laravel tests
         run: |
