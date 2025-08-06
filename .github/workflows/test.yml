@@ -40,7 +40,10 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --no-interaction --prefer-dist
+        run: |
+          cd sweatify
+          composer install --no-interaction --prefer-dist
+        
 
       - name: Wait for MySQL to be ready
         run: |
