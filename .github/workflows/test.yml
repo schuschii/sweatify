@@ -47,7 +47,7 @@ jobs:
 
       - name: Wait for MySQL to be ready
         run: |
-          until mysqladmin ping -h 127.0.0.1 -u sail -password --silent; do
+          until mysqladmin ping -h mysql -u sail -ppassword --silent; do
             sleep 1
           done
 
