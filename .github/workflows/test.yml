@@ -35,6 +35,9 @@ jobs:
       - name: Verify .env file
         run: cat sweatify/.env  # Debug to confirm .env content
 
+      - name: List environment files
+        run: ls -la sweatify/  # Check for conflicting .env files
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -46,11 +49,19 @@ jobs:
         run: |
           cd sweatify
           composer install --no-interaction --prefer-dist
+
       - name: Clear Laravel config cache
         run: |
           cd sweatify
           php artisan config:clear
+          php artisan cache:clear
           
+      - name: Debug Laravel environment
+        run: |
+          cd sweatify
+          php artisan env  # Show current environment
+          php artisan config:show database --env=testing  # Show database config
+          php artisan tinker --execute="echo config('database.connections.mysql.host');"
 
       - name: Check MySQL client connectivity
         run: |
@@ -67,12 +78,6 @@ jobs:
             echo "Waiting for MySQL..."
             sleep 2
           done
-
-      - name: Debug Laravel environment
-        run: |
-          cd sweatify
-          php artisan env  # Show current environment
-          php artisan config:show database --env=testing  # Show database config
 
       - name: Debug MySQL connection
         run: |
