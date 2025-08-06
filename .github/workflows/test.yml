@@ -46,7 +46,12 @@ jobs:
         run: |
           cd sweatify
           composer install --no-interaction --prefer-dist
-        
+      - name: Clear Laravel config cache
+        run: |
+          cd sweatify
+          php artisan config:clear
+          
+
       - name: Check MySQL client connectivity
         run: |
           mysql -h 127.0.0.1 -u sail -ppassword -e "SELECT 1" || echo "MySQL client connection failed"
