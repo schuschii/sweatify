@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Copy .env.testing to .env
-        run: cp sweatify/.env.testing .env
+        run: cp sweatify/.env.testing sweatify/.env
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
