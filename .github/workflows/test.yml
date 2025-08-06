@@ -21,7 +21,7 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
+          --health-cmd="mysqladmin ping -h mysql --silent"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -29,8 +29,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Copy .env.testing to .env
+      - name: Copy .env.ci to .env
         run: cp sweatify/.env.ci sweatify/.env
+
+      - name: Verify .env file
+        run: cat sweatify/.env  # Debug to confirm .env content
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -55,6 +58,11 @@ jobs:
             echo "Waiting for MySQL..."
             sleep 2
           done
+
+      - name: Debug MySQL connection
+        run: |
+          cd sweatify
+          php artisan db:monitor --env=testing
 
       - name: Generate Laravel app key
         run: |
