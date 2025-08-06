@@ -21,7 +21,7 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
+          --health-cmd="mysqladmin ping -h mysql --silent"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -55,6 +55,9 @@ jobs:
             echo "Waiting for MySQL..."
             sleep 2
           done
+
+      - name: Generate Laravel app key
+        run: php artisan key:generate --ansi
 
       - name: Run migrations with seeding
         run: |
