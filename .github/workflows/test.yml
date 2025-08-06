@@ -67,7 +67,7 @@ jobs:
         run: |
           cd sweatify
           php artisan env  # Show current environment
-          php artisan config:dump --env=testing  # Show loaded config
+          php artisan config:show database --env=testing  # Show database config
 
       - name: Debug MySQL connection
         run: |
