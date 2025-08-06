@@ -52,7 +52,11 @@ jobs:
           done
 
       - name: Run migrations with seeding
-        run: php artisan migrate --env=testing --seed --force
+        run: |
+          cd sweatify
+          php artisan migrate --env=testing --seed --force
 
       - name: Run Laravel tests
-        run: php artisan test
+        run: |
+          cd sweatify
+          php artisan test
