@@ -52,17 +52,17 @@ Sweatify consolidates all essential fitness features into one platform, eliminat
     chmod +x test.sh
     ./test.sh
     ```
--> This script:
-- runs migration on test database
-- seeds test database with data
-- runs tests
+-> This script runs:
+- Migration on test database
+- Seeds test database with data
+- Runs tests
 
 6. Stop containers and app
     ```bash
     chmod +x stop.sh
     ./stop.sh
     ```
--> this script runs:
+-> This script runs:
 - Stops containers
 - Removes containers
 - Removes networks
