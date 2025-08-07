@@ -80,7 +80,7 @@ jobs:
 
       - name: Check MySQL client connectivity
         run: |
-          mysql -h localhost -u sail -ppassword -e "SELECT 1" || echo "MySQL client connection failed"
+          mysql -h 127.0.0.1 -u sail -ppassword -e "SELECT 1" || echo "MySQL client connection failed"
 
       - name: Debug MySQL connection
         run: |
