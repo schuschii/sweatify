@@ -33,10 +33,10 @@ jobs:
         run: cp sweatify/.env.ci sweatify/.env
 
       - name: Verify .env file
-        run: cat sweatify/.env  # Debug to confirm .env content
+        run: cat sweatify/.env
 
       - name: List environment files
-        run: ls -la sweatify/  # Check for conflicting .env files
+        run: ls -la sweatify/
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
